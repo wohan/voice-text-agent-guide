@@ -1,0 +1,9 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"><modelVersion>4.0.0</modelVersion>
+<parent><groupId>dev.textagent</groupId><artifactId>text-agent-parent</artifactId><version>0.2.0-SNAPSHOT</version></parent>
+<artifactId>agent-spring-boot-starter</artifactId>
+<dependencies>
+<dependency><groupId>dev.textagent</groupId><artifactId>agent-core</artifactId><version>${project.version}</version></dependency>
+<dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+<dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-configuration-processor</artifactId><optional>true</optional></dependency>
+<dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+</dependencies></project>

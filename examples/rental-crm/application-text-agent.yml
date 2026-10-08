@@ -1,0 +1,18 @@
+text-agent:
+  enabled: ${TEXT_AGENT_ENABLED:true}
+  spec: classpath:rental-openapi.json
+  target-base-url: ${AGENT_TARGET_BASE_URL:http://127.0.0.1:8080}
+  model-endpoint: ${AGENT_MODEL_ENDPOINT:https://api.deepseek.com/chat/completions}
+  model: ${AGENT_MODEL:deepseek-flash}
+  api-key: ${AGENT_API_KEY:}
+  model-options:
+    thinking:
+      type: disabled
+    "[max_tokens]": 2048
+  confirmation-ttl: 3m
+  store: jdbc
+  state-encryption-key: ${AGENT_STATE_ENCRYPTION_KEY:${APP_FIELD_ENCRYPTION_KEY}}
+  session-ttl: 24h
+  max-sessions: 10000
+  max-sessions-per-owner: 20
+  requests-per-minute: 20

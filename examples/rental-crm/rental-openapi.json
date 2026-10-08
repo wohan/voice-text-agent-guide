@@ -1,0 +1,3409 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Rental Management API",
+    "version" : "1.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost",
+    "description" : "Generated server url"
+  } ],
+  "security" : [ {
+    "bearerAuth" : [ ]
+  } ],
+  "paths" : {
+    "/api/tenants/{id}" : {
+      "put" : {
+        "tags" : [ "tenant-controller" ],
+        "summary" : "Заменить арендатора",
+        "operationId" : "updateTenant",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Tenant"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Tenant"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "tenant-controller" ],
+        "summary" : "Удалить арендатора",
+        "operationId" : "deleteTenant",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/payments/{id}" : {
+      "put" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "Заменить платёж",
+        "operationId" : "updatePayment",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Payment"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Payment"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "Удалить платёж",
+        "operationId" : "deletePayment",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/objects/{id}" : {
+      "put" : {
+        "tags" : [ "object-controller" ],
+        "summary" : "Заменить объект аренды",
+        "operationId" : "updateObject",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RentalObject"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RentalObject"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "object-controller" ],
+        "summary" : "Удалить объект аренды",
+        "operationId" : "deleteObject",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/notifications/settings" : {
+      "get" : {
+        "tags" : [ "notification-controller" ],
+        "operationId" : "settings",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NotificationSettings"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      },
+      "put" : {
+        "tags" : [ "notification-controller" ],
+        "operationId" : "saveSettings",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/NotificationSettings"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/NotificationSettings"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/maintenance/{id}" : {
+      "put" : {
+        "tags" : [ "maintenance-controller" ],
+        "summary" : "Заменить заявку на обслуживание",
+        "operationId" : "updateMaintenance",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MaintenanceRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MaintenanceRequest"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "maintenance-controller" ],
+        "summary" : "Удалить заявку на обслуживание",
+        "operationId" : "deleteMaintenance",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/listings/{id}" : {
+      "put" : {
+        "tags" : [ "listing-controller" ],
+        "summary" : "Заменить объявление",
+        "operationId" : "updateListing",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Listing"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Listing"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "listing-controller" ],
+        "summary" : "Удалить объявление",
+        "operationId" : "deleteListing",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/leads/{id}" : {
+      "put" : {
+        "tags" : [ "lead-controller" ],
+        "summary" : "Заменить лида",
+        "operationId" : "updateLead",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Lead"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Lead"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "lead-controller" ],
+        "summary" : "Удалить лида",
+        "operationId" : "deleteLead",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/expenses/{id}" : {
+      "put" : {
+        "tags" : [ "expense-controller" ],
+        "summary" : "Заменить расход",
+        "operationId" : "updateExpense",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Expense"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Expense"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "expense-controller" ],
+        "summary" : "Удалить расход",
+        "operationId" : "deleteExpense",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/documents/{id}" : {
+      "put" : {
+        "tags" : [ "document-controller" ],
+        "summary" : "Заменить ссылку на документ",
+        "operationId" : "updateDocument",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/DocumentItem"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DocumentItem"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "document-controller" ],
+        "summary" : "Удалить ссылку на документ",
+        "operationId" : "deleteDocument",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/contracts/{id}" : {
+      "put" : {
+        "tags" : [ "contract-controller" ],
+        "summary" : "Заменить договор",
+        "operationId" : "updateContract",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LeaseContract"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LeaseContract"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "PUT replaces fields: requires current snapshot and concurrency preconditions"
+      },
+      "delete" : {
+        "tags" : [ "contract-controller" ],
+        "summary" : "Удалить договор",
+        "operationId" : "deleteContract",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Destructive operation requires separate policy"
+      }
+    },
+    "/api/billing/settings" : {
+      "get" : {
+        "tags" : [ "billing-controller" ],
+        "operationId" : "settings_1",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BillingSettings"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      },
+      "put" : {
+        "tags" : [ "billing-controller" ],
+        "operationId" : "saveSettings_1",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BillingSettings"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BillingSettings"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/tenants" : {
+      "get" : {
+        "tags" : [ "tenant-controller" ],
+        "summary" : "Показать список: арендатора",
+        "operationId" : "listTenants",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Tenant"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "fullName", "phone", "email" ]
+      },
+      "post" : {
+        "tags" : [ "tenant-controller" ],
+        "summary" : "Создать арендатора",
+        "operationId" : "createTenant",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Tenant"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Tenant"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/TenantAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "fullName", "phone", "email" ]
+      }
+    },
+    "/api/public/maintenance/{token}" : {
+      "get" : {
+        "tags" : [ "public-maintenance-controller" ],
+        "operationId" : "context",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      },
+      "post" : {
+        "tags" : [ "public-maintenance-controller" ],
+        "operationId" : "create_1",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PublicMaintenanceRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/payments" : {
+      "get" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "Показать список: платёж",
+        "operationId" : "listPayments",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Payment"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "objectId", "tenantId", "dueDate", "amount", "paidAmount", "status" ]
+      },
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "Создать платёж",
+        "operationId" : "createPayment",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Payment"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Payment"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/PaymentAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "objectId", "tenantId", "dueDate", "amount", "paidAmount", "status" ]
+      }
+    },
+    "/api/payments/{id}/mark-paid" : {
+      "post" : {
+        "tags" : [ "payment-controller" ],
+        "summary" : "Отметить платёж оплаченным",
+        "operationId" : "markPaymentPaid",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Payment"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "status", "paidAmount", "paidDate" ]
+      }
+    },
+    "/api/objects" : {
+      "get" : {
+        "tags" : [ "object-controller" ],
+        "summary" : "Показать список: объект аренды",
+        "operationId" : "listObjects",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/RentalObject"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "title", "address", "status", "monthlyRent" ]
+      },
+      "post" : {
+        "tags" : [ "object-controller" ],
+        "summary" : "Создать объект аренды",
+        "operationId" : "createObject",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RentalObject"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RentalObject"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/RentalObjectAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "title", "address", "status", "monthlyRent" ]
+      }
+    },
+    "/api/notifications/send-due" : {
+      "post" : {
+        "tags" : [ "notification-controller" ],
+        "operationId" : "sendDue",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/NotificationDelivery"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/maintenance" : {
+      "get" : {
+        "tags" : [ "maintenance-controller" ],
+        "summary" : "Показать список: заявку на обслуживание",
+        "operationId" : "listMaintenanceRequests",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/MaintenanceRequest"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "objectId", "title", "priority", "status", "dueDate", "cost" ]
+      },
+      "post" : {
+        "tags" : [ "maintenance-controller" ],
+        "summary" : "Создать заявку на обслуживание",
+        "operationId" : "createMaintenance",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/MaintenanceRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/MaintenanceRequest"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/MaintenanceRequestAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "objectId", "title", "priority", "status", "dueDate", "cost" ]
+      }
+    },
+    "/api/listings" : {
+      "get" : {
+        "tags" : [ "listing-controller" ],
+        "summary" : "Показать список: объявление",
+        "operationId" : "listListings",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Listing"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "objectId", "title", "price", "published" ]
+      },
+      "post" : {
+        "tags" : [ "listing-controller" ],
+        "summary" : "Создать объявление",
+        "operationId" : "createListing",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Listing"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Listing"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/ListingAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "objectId", "title", "price", "published" ]
+      }
+    },
+    "/api/leads" : {
+      "get" : {
+        "tags" : [ "lead-controller" ],
+        "summary" : "Показать список: лида",
+        "operationId" : "listLeads",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Lead"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "fullName", "phone", "source", "status" ]
+      },
+      "post" : {
+        "tags" : [ "lead-controller" ],
+        "summary" : "Создать лида",
+        "operationId" : "createLead",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Lead"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Lead"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/LeadAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "fullName", "phone", "source", "status" ]
+      }
+    },
+    "/api/expenses" : {
+      "get" : {
+        "tags" : [ "expense-controller" ],
+        "summary" : "Показать список: расход",
+        "operationId" : "listExpenses",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Expense"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "objectId", "expenseDate", "category", "amount" ]
+      },
+      "post" : {
+        "tags" : [ "expense-controller" ],
+        "summary" : "Создать расход",
+        "operationId" : "createExpense",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Expense"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Expense"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/ExpenseAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "objectId", "expenseDate", "category", "amount" ]
+      }
+    },
+    "/api/documents" : {
+      "get" : {
+        "tags" : [ "document-controller" ],
+        "summary" : "Показать список: ссылку на документ",
+        "operationId" : "listDocuments",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/DocumentItem"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "name", "type", "fileUrl", "expiresAt" ]
+      },
+      "post" : {
+        "tags" : [ "document-controller" ],
+        "summary" : "Создать ссылку на документ",
+        "operationId" : "createDocument",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/DocumentItem"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DocumentItem"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/DocumentItemAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "name", "type", "fileUrl", "expiresAt" ]
+      }
+    },
+    "/api/documents/upload" : {
+      "post" : {
+        "tags" : [ "document-controller" ],
+        "operationId" : "upload",
+        "parameters" : [ {
+          "name" : "objectId",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "tenantId",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "contractId",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        }, {
+          "name" : "name",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "type",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "enum" : [ "CONTRACT", "ACT", "RECEIPT", "PASSPORT_COPY", "PHOTO", "OTHER" ]
+          }
+        }, {
+          "name" : "expiresAt",
+          "in" : "query",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "multipart/form-data" : {
+              "schema" : {
+                "required" : [ "file" ],
+                "type" : "object",
+                "properties" : {
+                  "file" : {
+                    "type" : "string",
+                    "format" : "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/DocumentItem"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/contracts" : {
+      "get" : {
+        "tags" : [ "contract-controller" ],
+        "summary" : "Показать список: договор",
+        "operationId" : "listContracts",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/LeaseContract"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-response-fields" : [ "id", "objectId", "tenantId", "number", "startDate", "endDate", "rentAmount", "status" ]
+      },
+      "post" : {
+        "tags" : [ "contract-controller" ],
+        "summary" : "Создать договор",
+        "operationId" : "createContract",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LeaseContract"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LeaseContract"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : true,
+        "x-agent-input-schema" : {
+          "$ref" : "#/components/schemas/LeaseContractAgentInput"
+        },
+        "x-agent-response-fields" : [ "id", "objectId", "tenantId", "number", "startDate", "endDate", "rentAmount", "status" ]
+      }
+    },
+    "/api/billing/webhooks/payment" : {
+      "post" : {
+        "tags" : [ "billing-webhook-controller" ],
+        "operationId" : "payment",
+        "parameters" : [ {
+          "name" : "X-RentCRM-Webhook-Secret",
+          "in" : "header",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BillingWebhookRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/billing/invoices/{id}/mark-paid" : {
+      "post" : {
+        "tags" : [ "billing-controller" ],
+        "operationId" : "markPaid_1",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/billing/checkout" : {
+      "post" : {
+        "tags" : [ "billing-controller" ],
+        "operationId" : "checkout",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CheckoutRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/BillingInvoice"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/auth/reset-password" : {
+      "post" : {
+        "tags" : [ "auth-controller" ],
+        "operationId" : "resetPassword",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/auth/register" : {
+      "post" : {
+        "tags" : [ "auth-controller" ],
+        "operationId" : "register",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/auth/login" : {
+      "post" : {
+        "tags" : [ "auth-controller" ],
+        "operationId" : "login",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuthResponse"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/auth/forgot-password" : {
+      "post" : {
+        "tags" : [ "auth-controller" ],
+        "operationId" : "forgotPassword",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/admin/accounts/{accountId}/unblock" : {
+      "post" : {
+        "tags" : [ "admin-controller" ],
+        "operationId" : "unblock",
+        "parameters" : [ {
+          "name" : "accountId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/admin/accounts/{accountId}/block" : {
+      "post" : {
+        "tags" : [ "admin-controller" ],
+        "operationId" : "block",
+        "parameters" : [ {
+          "name" : "accountId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "additionalProperties" : {
+                  "type" : "string"
+                }
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Account"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/account/change-password" : {
+      "post" : {
+        "tags" : [ "account-security-controller" ],
+        "operationId" : "changePassword",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ChangePasswordRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/notifications/deliveries" : {
+      "get" : {
+        "tags" : [ "notification-controller" ],
+        "operationId" : "deliveries",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/NotificationDelivery"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/me" : {
+      "get" : {
+        "tags" : [ "main-controller" ],
+        "operationId" : "me",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/export/workbook" : {
+      "get" : {
+        "tags" : [ "export-controller" ],
+        "operationId" : "workbook",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "byte"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/documents/{id}/file" : {
+      "get" : {
+        "tags" : [ "document-controller" ],
+        "operationId" : "download",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "string",
+                  "format" : "binary"
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/dashboard" : {
+      "get" : {
+        "tags" : [ "main-controller" ],
+        "operationId" : "dashboard",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/billing/invoices" : {
+      "get" : {
+        "tags" : [ "billing-controller" ],
+        "operationId" : "invoices",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/BillingInvoice"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/auth/verify-email" : {
+      "get" : {
+        "tags" : [ "auth-controller" ],
+        "operationId" : "verifyEmail",
+        "parameters" : [ {
+          "name" : "token",
+          "in" : "query",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "object",
+                  "additionalProperties" : {
+                    "type" : "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security" : [ ],
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/audit" : {
+      "get" : {
+        "tags" : [ "main-controller" ],
+        "operationId" : "audit",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/AuditLog"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/admin/errors" : {
+      "get" : {
+        "tags" : [ "admin-controller" ],
+        "operationId" : "errors",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/ErrorEvent"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/admin/accounts" : {
+      "get" : {
+        "tags" : [ "admin-controller" ],
+        "operationId" : "accounts",
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Account"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    },
+    "/api/admin/accounts/{accountId}/invoices" : {
+      "get" : {
+        "tags" : [ "admin-controller" ],
+        "operationId" : "invoices_1",
+        "parameters" : [ {
+          "name" : "accountId",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "format" : "uuid"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "content" : {
+              "*/*" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/BillingInvoice"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-enabled" : false,
+        "x-agent-disabled-reason" : "Technical, sensitive, destructive or unsupported operation; explicit policy review required"
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Tenant" : {
+        "required" : [ "fullName", "phone" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "fullName" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "phone" : {
+            "maxLength" : 50,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "email" : {
+            "maxLength" : 254,
+            "minLength" : 0,
+            "type" : "string",
+            "format" : "email"
+          },
+          "passportMasked" : {
+            "type" : "string"
+          },
+          "inn" : {
+            "type" : "string"
+          },
+          "telegramChatId" : {
+            "type" : "string"
+          },
+          "whatsappPhone" : {
+            "type" : "string"
+          },
+          "notificationsEnabled" : {
+            "type" : "boolean"
+          },
+          "publicRequestToken" : {
+            "type" : "string"
+          },
+          "notes" : {
+            "maxLength" : 2000,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        }
+      },
+      "Payment" : {
+        "required" : [ "dueDate", "objectId" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "contractId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "paidDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "amount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "paidAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "PLANNED", "DUE", "OVERDUE", "PAID", "PARTIAL", "CANCELLED" ]
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "RENT", "DEPOSIT", "UTILITIES", "PENALTY", "OTHER" ]
+          },
+          "method" : {
+            "type" : "string"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        }
+      },
+      "RentalObject" : {
+        "required" : [ "address", "title", "type" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "title" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "APARTMENT", "COMMERCIAL", "WAREHOUSE", "STUDIO", "EQUIPMENT", "OTHER" ]
+          },
+          "address" : {
+            "maxLength" : 1000,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "areaSqm" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "cadastralNumber" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "VACANT", "OCCUPIED", "MAINTENANCE", "ARCHIVED" ]
+          },
+          "monthlyRent" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "monthlyUtilityAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "depositAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "notes" : {
+            "type" : "string"
+          }
+        }
+      },
+      "NotificationSettings" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          },
+          "remindDaysBefore" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "reminderTime" : {
+            "type" : "string"
+          },
+          "telegramEnabled" : {
+            "type" : "boolean"
+          },
+          "telegramBotToken" : {
+            "type" : "string"
+          },
+          "telegramDefaultChatId" : {
+            "type" : "string"
+          },
+          "smsRuEnabled" : {
+            "type" : "boolean"
+          },
+          "smsRuApiId" : {
+            "type" : "string"
+          },
+          "smsRuSender" : {
+            "type" : "string"
+          },
+          "smsRuTestMode" : {
+            "type" : "boolean"
+          },
+          "whatsappEnabled" : {
+            "type" : "boolean"
+          },
+          "whatsappApiUrl" : {
+            "type" : "string"
+          },
+          "whatsappToken" : {
+            "type" : "string"
+          },
+          "whatsappDefaultRecipient" : {
+            "type" : "string"
+          },
+          "messageTemplate" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "MaintenanceRequest" : {
+        "required" : [ "objectId", "title" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "title" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "priority" : {
+            "type" : "string",
+            "enum" : [ "LOW", "MEDIUM", "HIGH", "URGENT" ]
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "NEW", "IN_PROGRESS", "WAITING_TENANT", "DONE", "CANCELLED" ]
+          },
+          "cost" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "closedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "Listing" : {
+        "required" : [ "description", "objectId", "title" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "title" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "description" : {
+            "maxLength" : 10000,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "price" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "publicUrl" : {
+            "type" : "string"
+          },
+          "published" : {
+            "type" : "boolean"
+          },
+          "publishedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "Lead" : {
+        "required" : [ "fullName", "phone" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "listingId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "fullName" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "phone" : {
+            "maxLength" : 50,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "email" : {
+            "maxLength" : 254,
+            "minLength" : 0,
+            "type" : "string",
+            "format" : "email"
+          },
+          "source" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Expense" : {
+        "required" : [ "category", "expenseDate", "objectId" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "expenseDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "category" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "amount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "documentUrl" : {
+            "type" : "string"
+          },
+          "source" : {
+            "type" : "string"
+          },
+          "periodMonth" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        }
+      },
+      "DocumentItem" : {
+        "required" : [ "fileUrl", "name" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "contractId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "name" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "CONTRACT", "ACT", "RECEIPT", "PASSPORT_COPY", "PHOTO", "OTHER" ]
+          },
+          "fileUrl" : {
+            "maxLength" : 2000,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "storageKey" : {
+            "type" : "string"
+          },
+          "originalFileName" : {
+            "type" : "string"
+          },
+          "contentType" : {
+            "type" : "string"
+          },
+          "sizeBytes" : {
+            "type" : "integer",
+            "format" : "int64"
+          },
+          "scanStatus" : {
+            "type" : "string"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          }
+        }
+      },
+      "LeaseContract" : {
+        "required" : [ "endDate", "objectId", "startDate", "tenantId" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid",
+            "readOnly" : true
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time",
+            "readOnly" : true
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "number" : {
+            "type" : "string"
+          },
+          "startDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "endDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "rentAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "paymentDay" : {
+            "maximum" : 31,
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "depositAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "DRAFT", "ACTIVE", "EXPIRING", "ENDED", "TERMINATED" ]
+          },
+          "documentUrl" : {
+            "type" : "string"
+          },
+          "notes" : {
+            "type" : "string"
+          }
+        }
+      },
+      "BillingSettings" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "provider" : {
+            "type" : "string",
+            "enum" : [ "YOOKASSA", "CLOUDPAYMENTS", "ROBOKASSA", "GENERIC_PAYMENT_LINK" ]
+          },
+          "yookassaShopId" : {
+            "type" : "string"
+          },
+          "yookassaSecretKey" : {
+            "type" : "string"
+          },
+          "cloudPaymentsPublicId" : {
+            "type" : "string"
+          },
+          "cloudPaymentsApiSecret" : {
+            "type" : "string"
+          },
+          "robokassaMerchantLogin" : {
+            "type" : "string"
+          },
+          "robokassaPassword1" : {
+            "type" : "string"
+          },
+          "genericPaymentUrl" : {
+            "type" : "string"
+          },
+          "testMode" : {
+            "type" : "boolean"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "PublicMaintenanceRequest" : {
+        "required" : [ "title" ],
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "contactName" : {
+            "type" : "string"
+          },
+          "contactPhone" : {
+            "type" : "string"
+          }
+        }
+      },
+      "NotificationDelivery" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "paymentId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "channel" : {
+            "type" : "string",
+            "enum" : [ "TELEGRAM", "SMS_RU", "WHATSAPP" ]
+          },
+          "remindDaysBefore" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "recipient" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "SENT", "SKIPPED", "FAILED" ]
+          },
+          "response" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "BillingWebhookRequest" : {
+        "type" : "object",
+        "properties" : {
+          "provider" : {
+            "type" : "string"
+          },
+          "event" : {
+            "type" : "string"
+          },
+          "providerPaymentId" : {
+            "type" : "string"
+          },
+          "invoiceId" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Account" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "tariff" : {
+            "type" : "string",
+            "enum" : [ "FREE", "START", "PRO", "BUSINESS" ]
+          },
+          "objectsLimit" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "updatedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "subscriptionPaidUntil" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "subscriptionGraceUntil" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "blockedAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "blockedReason" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CheckoutRequest" : {
+        "type" : "object",
+        "properties" : {
+          "tariff" : {
+            "type" : "string",
+            "enum" : [ "FREE", "START", "PRO", "BUSINESS" ]
+          }
+        }
+      },
+      "BillingInvoice" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tariff" : {
+            "type" : "string",
+            "enum" : [ "FREE", "START", "PRO", "BUSINESS" ]
+          },
+          "amount" : {
+            "type" : "number"
+          },
+          "objectsLimit" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "provider" : {
+            "type" : "string",
+            "enum" : [ "YOOKASSA", "CLOUDPAYMENTS", "ROBOKASSA", "GENERIC_PAYMENT_LINK" ]
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "CREATED", "PENDING", "PAID", "FAILED", "CANCELLED" ]
+          },
+          "providerPaymentId" : {
+            "type" : "string"
+          },
+          "confirmationUrl" : {
+            "type" : "string"
+          },
+          "providerResponse" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "ResetPasswordRequest" : {
+        "required" : [ "token" ],
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string"
+          },
+          "newPassword" : {
+            "maxLength" : 2147483647,
+            "minLength" : 8,
+            "type" : "string"
+          }
+        }
+      },
+      "RegisterRequest" : {
+        "required" : [ "accountName", "fullName" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "maxLength" : 2147483647,
+            "minLength" : 8,
+            "type" : "string"
+          },
+          "fullName" : {
+            "type" : "string"
+          },
+          "accountName" : {
+            "type" : "string"
+          },
+          "termsAccepted" : {
+            "type" : "boolean"
+          },
+          "privacyAccepted" : {
+            "type" : "boolean"
+          },
+          "notificationConsent" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "AuthResponse" : {
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "fullName" : {
+            "type" : "string"
+          },
+          "role" : {
+            "type" : "string"
+          },
+          "emailVerified" : {
+            "type" : "boolean"
+          },
+          "verificationLink" : {
+            "type" : "string"
+          }
+        }
+      },
+      "LoginRequest" : {
+        "required" : [ "password" ],
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ForgotPasswordRequest" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ChangePasswordRequest" : {
+        "required" : [ "currentPassword" ],
+        "type" : "object",
+        "properties" : {
+          "currentPassword" : {
+            "type" : "string"
+          },
+          "newPassword" : {
+            "maxLength" : 2147483647,
+            "minLength" : 8,
+            "type" : "string"
+          }
+        }
+      },
+      "AuditLog" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "userId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "action" : {
+            "type" : "string"
+          },
+          "entityType" : {
+            "type" : "string"
+          },
+          "entityId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "actorEmail" : {
+            "type" : "string"
+          },
+          "summary" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          }
+        }
+      },
+      "ErrorEvent" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "accountId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "actorEmail" : {
+            "type" : "string"
+          },
+          "method" : {
+            "type" : "string"
+          },
+          "path" : {
+            "type" : "string"
+          },
+          "exceptionClass" : {
+            "type" : "string"
+          },
+          "message" : {
+            "type" : "string"
+          },
+          "stackTrace" : {
+            "type" : "string"
+          },
+          "createdAt" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "notified" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "TenantAgentInput" : {
+        "required" : [ "fullName", "phone" ],
+        "type" : "object",
+        "properties" : {
+          "fullName" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "phone" : {
+            "maxLength" : 50,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "email" : {
+            "maxLength" : 254,
+            "minLength" : 0,
+            "type" : "string",
+            "format" : "email"
+          },
+          "notes" : {
+            "maxLength" : 2000,
+            "minLength" : 0,
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "PaymentAgentInput" : {
+        "required" : [ "dueDate", "objectId" ],
+        "type" : "object",
+        "properties" : {
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "contractId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "paidDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "amount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "paidAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "PLANNED", "DUE", "OVERDUE", "PAID", "PARTIAL", "CANCELLED" ]
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "RENT", "DEPOSIT", "UTILITIES", "PENALTY", "OTHER" ]
+          },
+          "method" : {
+            "type" : "string"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "RentalObjectAgentInput" : {
+        "required" : [ "address", "title", "type" ],
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "APARTMENT", "COMMERCIAL", "WAREHOUSE", "STUDIO", "EQUIPMENT", "OTHER" ]
+          },
+          "address" : {
+            "maxLength" : 1000,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "areaSqm" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "cadastralNumber" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "VACANT", "OCCUPIED", "MAINTENANCE", "ARCHIVED" ]
+          },
+          "monthlyRent" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "monthlyUtilityAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "depositAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "notes" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "MaintenanceRequestAgentInput" : {
+        "required" : [ "objectId", "title" ],
+        "type" : "object",
+        "properties" : {
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "title" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "priority" : {
+            "type" : "string",
+            "enum" : [ "LOW", "MEDIUM", "HIGH", "URGENT" ]
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "NEW", "IN_PROGRESS", "WAITING_TENANT", "DONE", "CANCELLED" ]
+          },
+          "cost" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "dueDate" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "ListingAgentInput" : {
+        "required" : [ "description", "objectId", "title" ],
+        "type" : "object",
+        "properties" : {
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "title" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "description" : {
+            "maxLength" : 10000,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "price" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "publicUrl" : {
+            "type" : "string"
+          },
+          "published" : {
+            "type" : "boolean"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "LeadAgentInput" : {
+        "required" : [ "fullName", "phone" ],
+        "type" : "object",
+        "properties" : {
+          "listingId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "fullName" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "phone" : {
+            "maxLength" : 50,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "email" : {
+            "maxLength" : 254,
+            "minLength" : 0,
+            "type" : "string",
+            "format" : "email"
+          },
+          "source" : {
+            "type" : "string"
+          },
+          "status" : {
+            "type" : "string"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "ExpenseAgentInput" : {
+        "required" : [ "category", "expenseDate", "objectId" ],
+        "type" : "object",
+        "properties" : {
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "expenseDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "category" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "amount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "vendor" : {
+            "type" : "string"
+          },
+          "documentUrl" : {
+            "type" : "string"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "DocumentItemAgentInput" : {
+        "required" : [ "fileUrl", "name" ],
+        "type" : "object",
+        "properties" : {
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "contractId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "name" : {
+            "maxLength" : 200,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "CONTRACT", "ACT", "RECEIPT", "PASSPORT_COPY", "PHOTO", "OTHER" ]
+          },
+          "fileUrl" : {
+            "maxLength" : 2000,
+            "minLength" : 1,
+            "pattern" : "\\S",
+            "type" : "string"
+          },
+          "expiresAt" : {
+            "type" : "string",
+            "format" : "date"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "LeaseContractAgentInput" : {
+        "required" : [ "endDate", "objectId", "startDate", "tenantId" ],
+        "type" : "object",
+        "properties" : {
+          "objectId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "tenantId" : {
+            "type" : "string",
+            "format" : "uuid"
+          },
+          "number" : {
+            "type" : "string"
+          },
+          "startDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "endDate" : {
+            "type" : "string",
+            "format" : "date"
+          },
+          "rentAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "paymentDay" : {
+            "maximum" : 31,
+            "minimum" : 1,
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "depositAmount" : {
+            "minimum" : 0,
+            "type" : "number"
+          },
+          "status" : {
+            "type" : "string",
+            "enum" : [ "DRAFT", "ACTIVE", "EXPIRING", "ENDED", "TERMINATED" ]
+          },
+          "documentUrl" : {
+            "type" : "string"
+          },
+          "notes" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      }
+    },
+    "securitySchemes" : {
+      "bearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  }
+}

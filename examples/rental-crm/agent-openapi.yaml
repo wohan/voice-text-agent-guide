@@ -1,0 +1,42 @@
+openapi: 3.0.3
+info:
+  title: Rental CRM agent operations
+  version: 1.0.0
+paths:
+  /api/tenants:
+    post:
+      operationId: createTenant
+      summary: Создать арендатора
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantInput'
+      responses:
+        '200':
+          description: Арендатор создан
+components:
+  schemas:
+    TenantInput:
+      type: object
+      additionalProperties: false
+      required: [fullName, phone]
+      properties:
+        fullName:
+          type: string
+          description: ФИО арендатора
+          minLength: 2
+          maxLength: 200
+          pattern: '\S'
+        phone:
+          type: string
+          description: Телефон в международном формате, например +79001112233
+          pattern: '^\+[1-9][0-9]{7,14}$'
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        notes:
+          type: string
+          maxLength: 2000
